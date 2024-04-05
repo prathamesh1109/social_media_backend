@@ -30,10 +30,16 @@ export class App {
         this.app = express();
 
         this.httpServer = createServer(this.app);
-
+        
         this.middlewares();
         this.routes();
-        this.configServerSocket();
+        //const server = createServer(this.app);
+        // const io = new Server(server);
+        // this.httpServer.listen(7070, () => {
+        //     console.log('server running at http://localhost:7070');
+        //   });
+
+
     }
 
     private middlewares(){
@@ -60,13 +66,15 @@ export class App {
 
         const io = new ServerSocket(this.httpServer);
         socketChatMessages(io);
+        // console.log(io);
 
     }
 
     async listen(port: string): Promise<void> {
 
+        await this.configServerSocket();
         await this.httpServer.listen( port );
         console.log(`SERVER RUN ON PORT ${ port }`)
     }
-
+    
 }

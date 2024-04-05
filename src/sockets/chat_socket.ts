@@ -11,10 +11,11 @@ export const socketChatMessages = ( io: Server ) => {
 
 
     nameSpaceChat.on('connection', async client => {
-
+        console.log('USER CONECTED');
         const [ verify, uidPerson ] = verifyTokenSocket( client.handshake.headers['xxx-token'] );
-
-        if( !verify ) { return client.disconnect(); }
+        console.log(verify)
+        console.log(uidPerson)
+        // if( !verify ) { return client.disconnect(); }
 
         console.log('USER CONECTED');
 
